@@ -1,0 +1,20 @@
+{
+  "/vendors.css": "/vendors.d0af8129.chunk.css",
+  "/vendors.js": "/vendors.12fd421d.async.js",
+  "/layouts__BasicLayout.css": "/layouts__BasicLayout.5966d1a7.chunk.css",
+  "/layouts__BasicLayout.js": "/layouts__BasicLayout.cc706847.async.js",
+  "/layouts__UserLayout.css": "/layouts__UserLayout.a043cf5d.chunk.css",
+  "/layouts__UserLayout.js": "/layouts__UserLayout.8cd76ce1.async.js",
+  "/p__404.js": "/p__404.6cefae2c.async.js",
+  "/p__Welcome.js": "/p__Welcome.b6911091.async.js",
+  "/p__user__login.css": "/p__user__login.78b58bc9.chunk.css",
+  "/p__user__login.js": "/p__user__login.346b9b97.async.js",
+  "/p__user__login__model.ts.js": "/p__user__login__model.ts.4cc02e35.async.js",
+  "/umi.css": "/umi.9e04a23c.css",
+  "/umi.js": "/umi.181d218b.js",
+  "/favicon.png": "/favicon.png",
+  "/icons/icon-128x128.png": "/icons/icon-128x128.png",
+  "/icons/icon-192x192.png": "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png": "/icons/icon-512x512.png",
+  "/index.html": "/index.html"
+}

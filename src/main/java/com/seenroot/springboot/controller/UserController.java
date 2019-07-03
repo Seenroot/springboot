@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -12,7 +13,9 @@ public class UserController {
 
     @PostMapping("/login/account")
     public Map<String, Object> login() {
-        System.out.println("login");
-        return null;
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("status", "ok");
+        userInfo.put("currentAuthority", "admin");
+        return userInfo;
     }
 }
