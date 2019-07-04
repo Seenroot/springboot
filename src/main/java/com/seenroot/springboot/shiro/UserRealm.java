@@ -8,6 +8,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * 自定义Realm
  */
@@ -42,12 +44,12 @@ public class UserRealm extends AuthorizingRealm {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
-        User dbUser = userService.findByName(token.getUsername());
+        List<User> dbUserList = userService.findByName(token.getUsername());
 
         // 假设数据库的用户名和密码
-        // User dbUser = new User();
-        // dbUser.setName("bob");
-        // dbUser.setPassword("123456");
+        User dbUser = new User();
+        dbUser.setName("bob");
+        dbUser.setPassword("123456");
 
         // 编写Shiro判断逻辑，判断用户名和密码
         // 1. 判断用户名
