@@ -1,5 +1,8 @@
 package com.seenroot.springboot.controller;
 
+import com.seenroot.springboot.domain.User;
+import com.seenroot.springboot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ public class HelloController {
     @GetMapping("/testThymeleaf")
     public String testThymeleaf(Model model) {
         model.addAttribute("name", "springboot整合thymeleaf");
+
         return "test";
     }
 
