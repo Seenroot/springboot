@@ -86,6 +86,28 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
+                <configuration>
+                    <!-- 不要使用下面这种格式的url -->
+                    <!-- jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=UTF-8 -->
+                    <url>jdbc:mysql://localhost:3306/springboot</url>
+                    <user>root</user>
+                    <password>rootpwd</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <!-- 需要指定版本号 -->
+                        <version>8.0.15</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 
