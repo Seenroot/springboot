@@ -46,19 +46,23 @@ public class UserRealm extends AuthorizingRealm {
 
         List<User> dbUserList = userService.findByName(token.getUsername());
 
-        // 假设数据库的用户名和密码
-        User dbUser = new User();
-        dbUser.setName("bob");
-        dbUser.setPassword("123456");
+        for (User dbUser: dbUserList) {
+            // 编写Shiro判断逻辑，判断用户名和密码
+            // 1. 判断用户名
+            if (dbUser == null) {
+                // 用户名不存在
+                return null; // Shiro底层会抛出UnknownAccountException
+            }
 
-        // 编写Shiro判断逻辑，判断用户名和密码
-        // 1. 判断用户名
-        if (dbUser == null) {
-            // 用户名不存在
-            return null; // Shiro底层会抛出UnknownAccountException
+            // 2. 判断密码
+            return new SimpleAuthenticationInfo("", dbUser.getPassword(), "");
         }
+        return null;
 
-        // 2. 判断密码
-        return new SimpleAuthenticationInfo("", dbUser.getPassword(), "");
+        // 假设数据库的用户名和密码
+        // User dbUser = new User();
+        // dbUser.setName("bob");
+        // dbUser.setPassword("123456");
+
     }
 }
