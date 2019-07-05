@@ -18,11 +18,12 @@ public class ShiroConfig {
 
     /**
      * 创建ShiroFilterFactoryBean
+     *
      * @param securityManager
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager")DefaultWebSecurityManager securityManager) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -47,10 +48,17 @@ public class ShiroConfig {
         // 放行 login
         filterChainDefinitionMap.put("/login", "anon");
 
+        // 资源授权 要在下面的拦截所有的 前面
+        // 注意： 当前授权拦截后，shiro会自动跳转到未授权的页面
+        filterChainDefinitionMap.put("/add", "perms[user:add]");
+
         filterChainDefinitionMap.put("/*", "authc");
 
         // 修改调整的登录页面
         shiroFilterFactoryBean.setLoginUrl("/toLogin");
+
+        // 设置未授权提示页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -59,10 +67,11 @@ public class ShiroConfig {
 
     /**
      * 创建DefaultWebSecurityManager
+     *
      * @return
      */
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm")UserRealm userRealm) {
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 关联Realm
         securityManager.setRealm(userRealm);
@@ -71,6 +80,7 @@ public class ShiroConfig {
 
     /**
      * 创建Realm
+     *
      * @return
      */
     @Bean(name = "userRealm")
