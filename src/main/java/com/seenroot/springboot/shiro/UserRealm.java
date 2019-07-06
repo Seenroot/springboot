@@ -2,10 +2,13 @@ package com.seenroot.springboot.shiro;
 
 import com.seenroot.springboot.domain.User;
 import com.seenroot.springboot.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -28,7 +31,23 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("执行授权逻辑");
-        return null;
+        
+        // 给资源进行授权
+        // SimpleAuthenticationInfo 与 SimpleAuthorizationInfo
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+
+        // 添加资源的授权
+        info.addStringPermission("user:add");
+
+        // 获取当前登录用户
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        // 到数据库查询当前登录用户的授权字符串
+        User dbUser = userService.findById(user.getId());
+
+        info.addStringPermission(dbUser.getPerms());
+
+        return info;
     }
 
     /**
@@ -46,7 +65,7 @@ public class UserRealm extends AuthorizingRealm {
 
         List<User> dbUserList = userService.findByName(token.getUsername());
 
-        for (User dbUser: dbUserList) {
+        for (User dbUser : dbUserList) {
             // 编写Shiro判断逻辑，判断用户名和密码
             // 1. 判断用户名
             if (dbUser == null) {
@@ -55,7 +74,7 @@ public class UserRealm extends AuthorizingRealm {
             }
 
             // 2. 判断密码
-            return new SimpleAuthenticationInfo("", dbUser.getPassword(), "");
+            return new SimpleAuthenticationInfo(dbUser, dbUser.getPassword(), "");
         }
         return null;
 

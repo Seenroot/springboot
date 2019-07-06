@@ -56,6 +56,7 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <!-- 连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -64,6 +65,7 @@
 
         <!-- 导入MySQL Mybatis相关的依赖 -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!-- 数据库驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -107,6 +109,40 @@
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.5</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.15</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>mybatis generator</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 允许移动生成的文件 -->
+                    <verbose>true</verbose>
+                    <!-- 允许自动覆盖文件 -->
+                    <overwrite>true</overwrite>
+                    <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -8,4 +8,7 @@ import java.util.List;
 public interface UserMapper {
     @Select("select * from user where name = #{name}")
     List<User> findByName(String name);
+
+    @Select("select * from user where id = #{id}")
+    User findById(Integer id);
 }

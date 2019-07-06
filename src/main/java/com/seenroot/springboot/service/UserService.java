@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserService {
     List<User> findByName(String name);
+
+    User findById(Integer id);
 }

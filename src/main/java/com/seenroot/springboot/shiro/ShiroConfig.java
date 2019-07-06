@@ -13,7 +13,7 @@ import java.util.Map;
  * Shiro的配置类
  */
 // 配置类的注解，声明为一个配置类
-@Configuration
+// @Configuration
 public class ShiroConfig {
 
     /**
@@ -51,6 +51,7 @@ public class ShiroConfig {
         // 资源授权 要在下面的拦截所有的 前面
         // 注意： 当前授权拦截后，shiro会自动跳转到未授权的页面
         filterChainDefinitionMap.put("/add", "perms[user:add]");
+        filterChainDefinitionMap.put("/update", "perms[user:update]");
 
         filterChainDefinitionMap.put("/*", "authc");
 
