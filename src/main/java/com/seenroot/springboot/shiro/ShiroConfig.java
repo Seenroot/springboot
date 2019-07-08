@@ -13,7 +13,7 @@ import java.util.Map;
  * Shiro的配置类
  */
 // 配置类的注解，声明为一个配置类
-// @Configuration
+@Configuration
 public class ShiroConfig {
 
     /**
@@ -40,8 +40,8 @@ public class ShiroConfig {
          */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
-        // filterChainDefinitionMap.put("/add", "authc");
-        // filterChainDefinitionMap.put("/update", "authc");
+        filterChainDefinitionMap.put("/add", "authc");
+        filterChainDefinitionMap.put("/update", "authc");
 
         filterChainDefinitionMap.put("/testThymeleaf", "anon");
 
